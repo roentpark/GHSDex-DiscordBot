@@ -26,12 +26,10 @@ jobs:
       - name: Initialize Database Maps
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          DJANGO_SETTINGS_MODULE: ballsdex.settings
         run: python -m aerich upgrade || true
 
       - name: Launch Ballsdex Core Engine
         env:
           TOKEN: ${{ secrets.TOKEN }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          DJANGO_SETTINGS_MODULE: ballsdex.settings
         run: python -m ballsdex.core.bot
