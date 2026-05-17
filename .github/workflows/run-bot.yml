@@ -2,7 +2,7 @@ name: Run GHSdex Bot 24/7
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ v3 ]
   workflow_dispatch: # Allows you to manually click "Start"
 
 jobs:
