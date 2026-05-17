@@ -27,11 +27,14 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DJANGO_SETTINGS_MODULE: admin_panel.settings
-        run: python -m aerich upgrade || true
+        run: |
+          python -c "import django; django.setup()" || true
+          python -m aerich upgrade || true
 
       - name: Launch Ballsdex Core Engine
         env:
           TOKEN: ${{ secrets.TOKEN }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           DJANGO_SETTINGS_MODULE: admin_panel.settings
-        run: python -m ballsdex.core.bot
+        run: |
+          python -c "import django; django.setup(); from ballsdex.core.bot import main; import asyncio; asyncio.run(main())"
